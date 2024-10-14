@@ -109,8 +109,16 @@
     </style>
 </head>
 <body>
-
-    <div class="container">
+	<div class="container">
+		<a onclick="changeView('windows')">
+			windows
+		</a>
+		<a onclick="changeView('mac')">
+			mac
+		</a>
+	</div>
+    <div id="windows">
+		<div class="container">
         <h1>Windows Üzerinde DNS Değiştirme</h1>
         <div class="switch" id="darkModeSwitch">
             <div class="slider"></div>
@@ -141,14 +149,59 @@
         <div class="note">
             <strong>Not:</strong> DNS değişikliğinizin etkili olması için internet bağlantınızı yeniden başlatmanız gerekebilir.
         </div>
+		</div>
+	</div>
+	<div id="mac" hidden>
+    <div class="container">
+        <h1>Mac Üzerinde DNS Değiştirme</h1>
+        <div class="switch" id="darkModeSwitch">
+            <div class="slider"></div>
+        </div>
+        <p>Mac bilgisayarınızda DNS ayarlarını değiştirmek için aşağıdaki adımları izleyebilirsiniz:</p>
+        <ol>
+            <li>Sol üst köşedeki <strong>Apple menüsüne</strong> tıklayın ve <strong>Sistem Ayarları</strong>nı seçin.
+                <br><img src="/images/macgorsel1.png" alt="Sistem Ayarları"></li>
+            <li><strong>Ağ</strong> simgesine tıklayın.
+                <br><img src="/images/macgorsel2.png" alt="Ağ Ayarları"></li>
+            <li>Sol taraftaki bağlantı listesinde, DNS ayarlarını değiştirmek istediğiniz ağı seçin.
+                <br><img src="/images/macgorsel3.png" alt="Bağlantı Seçimi"></li>
+            <li>Sağ alttaki <strong>Gelişmiş</strong> butonuna tıklayın.
+                <br><img src="/images/macgorsel4.png" alt="Gelişmiş Ayarlar"></li>
+            <li>Üstteki sekmelerden <strong>DNS</strong> sekmesine gidin.
+                <br><img src="/images/macgorsel5.png" alt="DNS Sekmesi"></li>
+            <li>DNS sunucu adreslerini değiştirmek için <strong>+ Butonuna</strong> tıklayın ve tercih ettiğiniz DNS adreslerini girin:
+                <ul>
+                    <li>Tercih edilen DNS sunucusu: <strong>1.1.1.1</strong> (Cloudflare DNS)</li>
+                    <li>Alternatif DNS sunucusu: <strong>8.8.8.8</strong> (Google DNS)</li>
+                </ul>
+                <br><img src="/images/macgorsel6.png" alt="DNS Girişi"></li>
+            <li>Son olarak <strong>Tamam</strong> butonuna tıklayın ve ardından <strong>Uygula</strong> butonuna basarak değişikliklerinizi kaydedin.
+                <br><img src="/images/macgorsel7.png" alt="Ayarları Kaydet"></li>
+        </ol>
+        <div class="note">
+            <strong>Not:</strong> DNS değişikliğinizin etkili olması için internet bağlantınızı yeniden başlatmanız gerekebilir.
+        </div>
     </div>
-
+	</div>
     <script>
         const darkModeSwitch = document.getElementById('darkModeSwitch');
         darkModeSwitch.addEventListener('click', function() {
             document.body.classList.toggle('dark-mode');
             darkModeSwitch.classList.toggle('active');
         });
+		
+		function changeView(param){
+		var w = document.getElementById('windows');
+		var m = document.getElementById('mac');
+		if(param=='windows'){
+		m.setAttribute("hidden","");
+		w.removeAttribute("hidden","");
+		}
+		if(param=='mac'){
+		w.setAttribute("hidden","");
+		m.removeAttribute("hidden","");
+		}
+		}
     </script>
 
 </body>
