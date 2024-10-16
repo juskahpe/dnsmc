@@ -46,6 +46,12 @@
             border: 1px solid #ddd;
             border-radius: 4px;
         }
+        code {
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
         /* Switch button styles */
         .switch {
             position: absolute;
@@ -92,6 +98,22 @@
             background-color: #555;
             border-left-color: #ffca28;
         }
+        .dark-mode img {
+            border-color: #666;
+        }
+        .dark-mode .switch {
+            background-color: #666;
+        }
+        .dark-mode .switch.active {
+            background-color: #ffca28;
+        }
+        .dark-mode .switch.active .slider {
+            background-color: #333;
+        }
+        .dark-mode code {
+            background-color: #555;
+            color: #ffca28;
+        }
 
         /* Responsive design */
         @media (max-width: 768px) {
@@ -119,6 +141,12 @@
 			<a onclick="changeView('mac')">
 				<svg fill="#000000" height="80px" width="80px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 22.773 22.773" xml:space="preserve" data-darkreader-inline-fill="" style="--darkreader-inline-fill: #000000;"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M15.769,0c0.053,0,0.106,0,0.162,0c0.13,1.606-0.483,2.806-1.228,3.675c-0.731,0.863-1.732,1.7-3.351,1.573 c-0.108-1.583,0.506-2.694,1.25-3.561C13.292,0.879,14.557,0.16,15.769,0z"></path> <path d="M20.67,16.716c0,0.016,0,0.03,0,0.045c-0.455,1.378-1.104,2.559-1.896,3.655c-0.723,0.995-1.609,2.334-3.191,2.334 c-1.367,0-2.275-0.879-3.676-0.903c-1.482-0.024-2.297,0.735-3.652,0.926c-0.155,0-0.31,0-0.462,0 c-0.995-0.144-1.798-0.932-2.383-1.642c-1.725-2.098-3.058-4.808-3.306-8.276c0-0.34,0-0.679,0-1.019 c0.105-2.482,1.311-4.5,2.914-5.478c0.846-0.52,2.009-0.963,3.304-0.765c0.555,0.086,1.122,0.276,1.619,0.464 c0.471,0.181,1.06,0.502,1.618,0.485c0.378-0.011,0.754-0.208,1.135-0.347c1.116-0.403,2.21-0.865,3.652-0.648 c1.733,0.262,2.963,1.032,3.723,2.22c-1.466,0.933-2.625,2.339-2.427,4.74C17.818,14.688,19.086,15.964,20.67,16.716z"></path> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </g> </g></svg>
 			</a>
+            <a onclick="changeView('android')">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="80px" width="80px" viewBox="-147 -70 294 345"><g fill="#a4c639"><use stroke-width="14.4" xlink:href="#b" stroke="#FFF"/><use xlink:href="#a" transform="scale(-1,1)"/><g id="a" stroke="#FFF" stroke-width="7.2"><rect rx="6.5" transform="rotate(29)" height="86" width="13" y="-86" x="14"/><rect id="c" rx="24" height="133" width="48" y="41" x="-143"/><use y="97" x="85" xlink:href="#c"/></g><g id="b"><ellipse cy="41" rx="91" ry="84"/><rect rx="22" height="182" width="182" y="20" x="-91"/></g></g><g stroke="#FFF" stroke-width="7.2" fill="#FFF"><path d="m-95 44.5h190"/><circle cx="-42" r="4"/><circle cx="42" r="4"/></g></svg>
+			</a>
+            <a onclick="changeView('ios')">
+                <svg height="80px" width="80px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><g id="Layer_2" data-name="Layer 2"><g id="invisible_box" data-name="invisible box"><rect width="48" height="48" fill="none"/><rect width="48" height="48" fill="none"/></g><g id="icons_Q2" data-name="icons Q2"><path d="M20,15.7c-4.5,0-7.5,3.7-7.5,9.3s2.8,9.4,7.2,9.4S27,29.6,27,24.9,25.2,15.7,20,15.7Zm0,0c-4.5,0-7.5,3.7-7.5,9.3s2.8,9.4,7.2,9.4S27,29.6,27,24.9,25.2,15.7,20,15.7ZM42,4H6A2,2,0,0,0,4,6V42a2,2,0,0,0,2,2H42a2,2,0,0,0,2-2V6A2,2,0,0,0,42,4ZM8.9,35.7H7.3V20.2H8.9ZM8,17.3a1.1,1.1,0,0,1-1-1.1,1.1,1.1,0,1,1,2.2,0A1.1,1.1,0,0,1,8,17.3ZM19.7,36c-4.4,0-8.8-3.4-8.8-10.9S15.5,14,20,14a7.7,7.7,0,0,1,3.4.7,8.3,8.3,0,0,1,2.8,2.1,12.5,12.5,0,0,1,2.5,8C28.7,33.1,23.8,36,19.7,36Zm14.8,0a8.4,8.4,0,0,1-4.7-1.4l-.3-.2.7-1.5.4.3a8.2,8.2,0,0,0,4,1.2c2.3,0,4.8-1.6,4.8-4.3s-1.2-3.6-4.2-4.9-5.1-2.4-5.1-5.6,2.5-5.6,6-5.6a7.2,7.2,0,0,1,4,1l.3.3-.7,1.4-.5-.3a6.2,6.2,0,0,0-3.1-.8,4.1,4.1,0,0,0-4.3,4c0,2.2,1.6,3,4,4.1h.3c3.2,1.6,4.9,3,4.9,6.1S38.3,36,34.5,36ZM20,15.7c-4.5,0-7.5,3.7-7.5,9.3s2.8,9.4,7.2,9.4S27,29.6,27,24.9,25.2,15.7,20,15.7Z"/></g></g></svg>
+            </a>
 		</div>
 	    <div class="switch" id="darkModeSwitch">
 			<div class="slider"></div>
@@ -129,60 +157,118 @@
         <h1>Windows Üzerinde DNS Değiştirme</h1>
         <p>Windows bilgisayarınızda DNS ayarlarını değiştirmek için aşağıdaki adımları izleyebilirsiniz:</p>
         <ol>
-            <li>Başlat menüsünden <strong>Denetim Masası</strong>nı açın.
+            <li>Başlat menüsünden <b>Denetim Masası</b>nı açın.
                 <br><img src="/images/wingorsel1.png" alt="Denetim Masası"></li>
-            <li><strong>Ağ ve Paylaşım Merkezi</strong>ne gidin.
+            <li><b>Ağ ve Paylaşım Merkezi</b>ne gidin.
                 <br><img src="/images/wingorsel2.png" alt="Ağ ve Paylaşım Merkezi"></li>
-            <li>Sol tarafta bulunan <strong>Bağdaştırıcı ayarlarını değiştir</strong> seçeneğine tıklayın.
+            <li>Sol tarafta bulunan <b>Bağdaştırıcı ayarlarını değiştir</b> seçeneğine tıklayın.
                 <br><img src="/images/wingorsel3.png" alt="Bağdaştırıcı Ayarlarını Değiştir"></li>
-            <li>DNS ayarlarını değiştirmek istediğiniz bağlantıya sağ tıklayıp <strong>Özellikler</strong>i seçin.
+            <li>DNS ayarlarını değiştirmek istediğiniz bağlantıya sağ tıklayıp <b>Özellikler</b>i seçin.
                 <br><img src="/images/wingorsel4.png" alt="Bağlantı Özellikleri"></li>
-            <li><strong>İnternet Protokolü Sürüm 4 (TCP/IPv4)</strong>ü seçip <strong>Özellikler</strong> butonuna tıklayın.
+            <li><b>İnternet Protokolü Sürüm 4 (TCP/IPv4)</b>ü seçip <b>Özellikler</b> butonuna tıklayın.
                 <br><img src="/images/wingorsel5.png" alt="IPv4 Seçimi"></li>
-            <li>Açılan pencerede <strong>Aşağıdaki DNS sunucu adreslerini kullan</strong>ı seçin.
+            <li>Açılan pencerede <b>Aşağıdaki DNS sunucu adreslerini kullan</b>ı seçin.
                 <br><img src="/images/wingorsel6.png" alt="DNS Adresleri Girişi"></li>
             <li>Tercih edilen ve alternatif DNS adreslerinizi girin. Önerilen DNS adresleri:
                 <ul>
-                    <li>Tercih edilen DNS sunucusu: <strong>1.1.1.1</strong> (Cloudflare DNS)</li>
-                    <li>Alternatif DNS sunucusu: <strong>8.8.8.8</strong> (Google DNS)</li>
+                    <li>Tercih edilen DNS sunucusu: <code>1.1.1.1</code> (Cloudflare DNS)</li>
+                    <li>Alternatif DNS sunucusu: <code>8.8.8.8</code> (Google DNS)</li>
                 </ul>
                 <br><img src="/images/wingorsel7.png" alt="DNS Girişi"></li>
-            <li>Son olarak <strong>Tamam</strong> butonuna tıklayın ve değişikliklerinizi kaydedin.
+            <li>Son olarak <b>Tamam</b> butonuna tıklayın ve değişikliklerinizi kaydedin.
                 <br><img src="/images/wingorsel8.png" alt="Ayarları Kaydet"></li>
         </ol>
         <div class="note">
-            <strong>Not:</strong> DNS değişikliğinizin etkili olması için internet bağlantınızı yeniden başlatmanız gerekebilir.
+            <b>Not:</b> DNS değişikliğinizin etkili olması için internet bağlantınızı yeniden başlatmanız gerekebilir.
         </div>
 		</div>
 	</div>
 	<div id="mac" hidden>
-    <div class="container">
-        <h1>Mac Üzerinde DNS Değiştirme</h1>
-        <p>Mac bilgisayarınızda DNS ayarlarını değiştirmek için aşağıdaki adımları izleyebilirsiniz:</p>
-        <ol>
-            <li>Sol üst köşedeki <strong>Apple menüsüne</strong> tıklayın ve <strong>Sistem Ayarları</strong>nı seçin.
-                <br><img src="/images/macgorsel1.png" alt="Sistem Ayarları"></li>
-            <li><strong>Network</strong> simgesine tıklayın.
-                <br><img src="/images/macgorsel2.png" alt="Ağ Ayarları"></li>
-            <li>Listedeki bağlantı listesinde, DNS ayarlarını değiştirmek istediğiniz ağı seçin.
-                <br><img src="/images/macgorsel3.png" alt="Bağlantı Seçimi"></li>
-            <li>Sağ alttaki <strong>Detaylar</strong> butonuna tıklayın.
-                <br><img src="/images/macgorsel4.png" alt="Gelişmiş Ayarlar"></li>
-            <li>Üstteki sekmelerden <strong>DNS</strong> sekmesine gidin.
-                <br><img src="/images/macgorsel5.png" alt="DNS Sekmesi"></li>
-            <li>DNS sunucu adreslerini değiştirmek için <strong>+ Butonuna</strong> tıklayın ve tercih ettiğiniz DNS adreslerini girin:
-                <ul>
-                    <li>Tercih edilen DNS sunucusu: <strong>1.1.1.1</strong> (Cloudflare DNS)</li>
-                    <li>Alternatif DNS sunucusu: <strong>8.8.8.8</strong> (Google DNS)</li>
-                </ul>
-                <img src="/images/macgorsel6.png" alt="DNS Girişi"></li>
-            <li>Son olarak <strong>Tamam</strong> butonuna tıklayın değişikliklerinizi kaydedin.
-            </li>
-        </ol>
-        <div class="note">
-            <strong>Not:</strong> DNS değişikliğinizin etkili olması için internet bağlantınızı yeniden başlatmanız gerekebilir.
+        <div class="container">
+            <h1>Mac Üzerinde DNS Değiştirme</h1>
+            <p>Mac bilgisayarınızda DNS ayarlarını değiştirmek için aşağıdaki adımları izleyebilirsiniz:</p>
+            <ol>
+                <li>Sol üst köşedeki <b>Apple menüsüne</b> tıklayın ve <b>Sistem Ayarları</b>nı seçin.
+                    <br><img src="/images/macgorsel1.png" alt="Sistem Ayarları"></li>
+                <li><b>Network</b> simgesine tıklayın.
+                    <br><img src="/images/macgorsel2.png" alt="Ağ Ayarları"></li>
+                <li>Listedeki bağlantı listesinde, DNS ayarlarını değiştirmek istediğiniz ağı seçin.
+                    <br><img src="/images/macgorsel3.png" alt="Bağlantı Seçimi"></li>
+                <li>Sağ alttaki <b>Detaylar</b> butonuna tıklayın.
+                    <br><img src="/images/macgorsel4.png" alt="Gelişmiş Ayarlar"></li>
+                <li>Üstteki sekmelerden <b>DNS</b> sekmesine gidin.
+                    <br><img src="/images/macgorsel5.png" alt="DNS Sekmesi"></li>
+                <li>DNS sunucu adreslerini değiştirmek için <b>+ Butonuna</b> tıklayın ve tercih ettiğiniz DNS adreslerini girin:
+                    <ul>
+                        <li>Tercih edilen DNS sunucusu: <code>1.1.1.1</code> (Cloudflare DNS)</li>
+                        <li>Alternatif DNS sunucusu: <code>8.8.8.8</code> (Google DNS)</li>
+                    </ul>
+                    <img src="/images/macgorsel6.png" alt="DNS Girişi"></li>
+                <li>Son olarak <b>Tamam</b> butonuna tıklayın değişikliklerinizi kaydedin.
+                </li>
+            </ol>
+            <div class="note">
+                <b>Not:</b> DNS değişikliğinizin etkili olması için internet bağlantınızı yeniden başlatmanız gerekebilir.
+            </div>
         </div>
-    </div>
+	</div>
+    <div id="android" hidden>
+        <div class="container">
+            <h1>Android Üzerinde DNS Değiştirme</h1>
+            <p>Android bilgisayarınızda DNS ayarlarını değiştirmek için aşağıdaki adımları izleyebilirsiniz:</p>
+            <ol>
+                <li>Üst kısımda yer alan durum çubuğundan <b>Ayarlar sembolüne</b> tıklayın ve <b>Sistem Ayarları</b>nı seçin.
+                    <br><img src="/images/androidgorsel1.png" alt="Cihaz Ayarları"></li>
+                <li><b>Bağlantılar</b> menüsüne tıklayın.
+                    <br><img src="/images/androidgorsel2.png" alt="Bağlantılar Menüsü"></li>
+                <li><b>Wifi</b> menüsüne tıklayın.
+                    <br><img src="/images/androidgorsel3.png" alt="Wifi Menüsü"></li>
+                <li>Listeden DNS ayarlarını değiştirmek istediğiniz ağın sağ tarafında yer alan <b>ayarlar</b> sembolüne basın.
+                    <br><img src="/images/androidgorsel4.png" alt="Wifi Detay"></li>
+                <li>Aşağıda yer alan <b>Daha fazla gör</b> seçeneğine tıklayın.
+                    <br><img src="/images/androidgorsel5.png" alt="Wifi Detay > Daha fazla gör"></li>
+                <li><b>IP ayarları</b> alanı (daha önce değişiklik yapmadıysanız) <b>DHCP</b> olarak görünecektir. O alanı <b>Statik</b> olarak değiştirin.
+                    <br>Aşağıda yer alan <b>DNS 1</b> ve <b>DNS 2</b> alanlarına DNS adreslerini girin:
+                    <ul>
+                        <li>DNS 1: <code>1.1.1.1</code> (Cloudflare DNS)</li>
+                        <li>DNS 2: <code>8.8.8.8</code> (Google DNS)</li>
+                    </ul>
+                    Son olarak <b>Kaydet</b> butonuna tıklayın.
+                    <br><img src="/images/androidgorsel6.png" alt="DNS Değiştirme Ekranı / IP Ayarları"></li>
+            </ol>
+            <div class="note">
+                <b>Not:</b> DNS değişikliğinizin etkili olması için internet bağlantınızı yeniden başlatmanız gerekebilir.
+            </div>
+        </div>
+	</div>
+    <div id="ios" hidden>
+        <div class="container">
+            <h1>IOS Üzerinde DNS Değiştirme</h1>
+            <p>Mac bilgisayarınızda DNS ayarlarını değiştirmek için aşağıdaki adımları izleyebilirsiniz:</p>
+            <ol>
+                <li>Sol üst köşedeki <b>Apple menüsüne</b> tıklayın ve <b>Sistem Ayarları</b>nı seçin.
+                    <br><img src="/images/macgorsel1.png" alt="Sistem Ayarları"></li>
+                <li><b>Network</b> simgesine tıklayın.
+                    <br><img src="/images/macgorsel2.png" alt="Ağ Ayarları"></li>
+                <li>Listedeki bağlantı listesinde, DNS ayarlarını değiştirmek istediğiniz ağı seçin.
+                    <br><img src="/images/macgorsel3.png" alt="Bağlantı Seçimi"></li>
+                <li>Sağ alttaki <b>Detaylar</b> butonuna tıklayın.
+                    <br><img src="/images/macgorsel4.png" alt="Gelişmiş Ayarlar"></li>
+                <li>Üstteki sekmelerden <b>DNS</b> sekmesine gidin.
+                    <br><img src="/images/macgorsel5.png" alt="DNS Sekmesi"></li>
+                <li>DNS sunucu adreslerini değiştirmek için <b>+ Butonuna</b> tıklayın ve tercih ettiğiniz DNS adreslerini girin:
+                    <ul>
+                        <li>Tercih edilen DNS sunucusu: <b>1.1.1.1</b> (Cloudflare DNS)</li>
+                        <li>Alternatif DNS sunucusu: <b>8.8.8.8</b> (Google DNS)</li>
+                    </ul>
+                    <img src="/images/macgorsel6.png" alt="DNS Girişi"></li>
+                <li>Son olarak <b>Tamam</b> butonuna tıklayın değişikliklerinizi kaydedin.
+                </li>
+            </ol>
+            <div class="note">
+                <b>Not:</b> DNS değişikliğinizin etkili olması için internet bağlantınızı yeniden başlatmanız gerekebilir.
+            </div>
+        </div>
 	</div>
     <script>
         const darkModeSwitch = document.getElementById('darkModeSwitch');
@@ -192,16 +278,34 @@
         });
 		
 		function changeView(param){
-		var w = document.getElementById('windows');
-		var m = document.getElementById('mac');
-		if(param=='windows'){
-		m.setAttribute("hidden","");
-		w.removeAttribute("hidden","");
-		}
-		if(param=='mac'){
-		w.setAttribute("hidden","");
-		m.removeAttribute("hidden","");
-		}
+            var w = document.getElementById('windows');
+            var m = document.getElementById('mac');
+            var a = document.getElementById('android');
+            var i = document.getElementById('ios');
+            if(param=='windows'){
+                m.setAttribute("hidden","");
+                a.setAttribute("hidden","");
+                i.setAttribute("hidden","");
+                w.removeAttribute("hidden","");
+            }
+            if(param=='mac'){
+                w.setAttribute("hidden","");
+                a.setAttribute("hidden","");
+                i.setAttribute("hidden","");
+                m.removeAttribute("hidden","");
+            }
+            if(param=='android'){
+                w.setAttribute("hidden","");
+                m.setAttribute("hidden","");
+                i.setAttribute("hidden","");
+                a.removeAttribute("hidden","");
+            }
+            if(param=='ios'){
+                w.setAttribute("hidden","");
+                m.setAttribute("hidden","");
+                a.setAttribute("hidden","");
+                i.removeAttribute("hidden","");
+            }
 		}
     </script>
 
