@@ -1,311 +1,390 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Windows DNS Değiştirme</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            position: relative;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-            transition: color 0.3s;
-        }
-        ol {
-            margin-top: 20px;
-        }
-        li {
-            margin-bottom: 10px;
-        }
-        .note {
-            background-color: #ffefc4;
-            padding: 10px;
-            border-left: 4px solid #ffca28;
-            margin-top: 20px;
-        }
-        img {
-            width: 100%;
-            height: auto;
-            margin-top: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        code {
-            background-color: #f4f4f4;
-            color: #333;
-            padding: 2px 4px;
-            border-radius: 4px;
-        }
-        /* Switch button styles */
-        .switch {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: inline-block;
-            width: 60px;
-            height: 30px;
-            background-color: #ccc;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .switch .slider {
-            position: absolute;
-            height: 26px;
-            width: 26px;
-            background-color: white;
-            border-radius: 50%;
-            top: 2px;
-            left: 2px;
-            transition: transform 0.3s;
-        }
-        .switch.active {
-            background-color: #4caf50;
-        }
-        .switch.active .slider {
-            transform: translateX(30px);
-        }
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Windows, Mac, Android ve IOS için DNS nasıl değiştirileceği konusunda resimli şekilde anlatım içermektedir.">
+	<meta name="keywords" content="DNS, DNS Değiştirme, DNS Değiştirme Rehberi, DNS Değiştirme Nasıl Yapılır, DNS Değiştirme Resimli Anlatım, Android DNS Değiştirme, IOS DNS değiştirme, Mac DNS değiştirme, Windows DNS değiştirme">
+	<meta name="author" content="MC Arge">
+	<meta name="robots" content="index, follow">
+	<meta name="googlebot" content="index, follow">
+	<meta name="google" content="notranslate">
+	<title>DNS Değiştirme Rehberi</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f4f4f4;
+			margin: 0;
+			padding: 20px;
+			transition: background-color 0.3s, color 0.3s;
+		}
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+			background-color: #fff;
+			padding: 20px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			border-radius: 8px;
+			position: relative;
+			transition: background-color 0.3s, color 0.3s;
+		}
+		h1 {
+			text-align: center;
+			color: #333;
+			transition: color 0.3s;
+		}
+		ol {
+			margin-top: 20px;
+		}
+		li {
+			margin-bottom: 10px;
+		}
+		.note {
+			background-color: #ffefc4;
+			padding: 10px;
+			border-left: 4px solid #ffca28;
+			margin-top: 20px;
+		}
+		img {
+			width: 100%;
+			height: auto;
+			margin-top: 15px;
+			border: 1px solid #ddd;
+			border-radius: 4px;
+		}
+		code {
+			background-color: #f4f4f4;
+			color: #333;
+			padding: 2px 4px;
+			border-radius: 4px;
+		}
+		/* Switch button styles */
+		.switch {
+			margin-top: 20px;
+			display: flex;
+			width: 60px;
+			height: 30px;
+			background-color: #ccc;
+			border-radius: 30px;
+			cursor: pointer;
+			transition: background-color 0.3s;
+		}
+		.switch .slider {
+			margin: 2px;
+			height: 26px;
+			width: 26px;
+			background-color: white;
+			border-radius: 50%;
+			transition: transform 0.3s;
+		}
+		.switch.dark-active {
+			background-color: #4caf50;
+		}
+		.switch.dark-active .slider {
+			transform: translateX(30px);
+		}
 
-        /* Dark mode styles */
-        .dark-mode {
-            background-color: #333;
-            color: white;
-        }
-        .dark-mode .container {
-            background-color: #444;
-            color: white;
-        }
-        .dark-mode h1 {
-            color: #ffca28;
-        }
-        .dark-mode .note {
-            background-color: #555;
-            border-left-color: #ffca28;
-        }
-        .dark-mode img {
-            border-color: #666;
-        }
-        .dark-mode .switch {
-            background-color: #666;
-        }
-        .dark-mode .switch.active {
-            background-color: #ffca28;
-        }
-        .dark-mode .switch.active .slider {
-            background-color: #333;
-        }
-        .dark-mode code {
-            background-color: #555;
-            color: #ffca28;
-        }
+		/* Dark mode styles */
+		.dark-mode {
+			background-color: #333;
+			color: white;
+		}
+		.dark-mode .container {
+			background-color: #444;
+			color: white;
+		}
+		.dark-mode .tab {
+			border-color: #555;
+			background-color: #555;
+		}
+		.dark-mode .tab button {
+			background-color: #555;
+			color: white;
+		}
+		.dark-mode .tab button.active {
+			background-color: #666;
+			color: #ffca28;
+		}
+		.dark-mode .tabcontent {
+			background-color: #333;
+			color: white;
+		}
+		.dark-mode h1 {
+			color: #ffca28;
+		}
+		.dark-mode .note {
+			background-color: #555;
+			border-left-color: #ffca28;
+		}
+		.dark-mode img {
+			border-color: #666;
+		}
+		.dark-mode .switch {
+			background-color: #666;
+		}
+		.dark-mode .switch.dark-active {
+			background-color: #ffca28;
+		}
+		.dark-mode .switch.dark-active .slider {
+			background-color: #333;
+		}
+		.dark-mode code {
+			background-color: #555;
+			color: #ffca28;
+		}
 
-        /* Responsive design */
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            .container {
-                padding: 15px;
-            }
-            .switch {
-                top: 10px;
-                right: 10px;
-            }
-        }
-    </style>
+		/* Responsive design */
+		@media (max-width: 768px) {
+			body {
+				padding: 10px;
+			}
+			.container {
+				padding: 15px;
+			}
+			.switch {
+				top: 10px;
+				right: 10px;
+			}
+		}
+
+		/* Style the tab */
+		.tab {
+			width: 100%;
+			overflow: hidden;
+			border: 1px solid #ccc;
+			background-color: #f1f1f1;
+		}
+		.tab p {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		/* Style the buttons inside the tab */
+		.tab button {
+			width: 25%;
+			background-color: inherit;
+			float: left;
+			border: none;
+			outline: none;
+			cursor: pointer;
+			padding: 14px 16px;
+			transition: 0.3s;
+			font-size: 17px;
+		}
+		.tab button svg {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin: 0 auto;
+
+		}
+
+		/* Change background color of buttons on hover */
+		.tab button:hover {
+			background-color: #ddd;
+		}
+
+		/* Create an active/current tablink class */
+		.tab button.active {
+			background-color: #ccc;
+			color: #333;
+		}
+	</style>
 </head>
 <body>
 	<div class="container">
-		<div style="
-		display: flex;
-		justify-content: space-evenly;">
-			<a onclick="changeView('windows')">
-				<svg width="80px" height="80px" viewBox="-0.5 0 257 257" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" fill="#000000" data-darkreader-inline-fill="" style="--darkreader-inline-fill: #000000;"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M0 36.357L104.62 22.11l.045 100.914-104.57.595L0 36.358zm104.57 98.293l.08 101.002L.081 221.275l-.006-87.302 104.494.677zm12.682-114.405L255.968 0v121.74l-138.716 1.1V20.246zM256 135.6l-.033 121.191-138.716-19.578-.194-101.84L256 135.6z" fill="#00ADEF" data-darkreader-inline-fill="" style="--darkreader-inline-fill: #008abf;"></path></g></svg>
-			</a>
-			<a onclick="changeView('mac')">
-				<svg fill="#000000" height="80px" width="80px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 22.773 22.773" xml:space="preserve" data-darkreader-inline-fill="" style="--darkreader-inline-fill: #000000;"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M15.769,0c0.053,0,0.106,0,0.162,0c0.13,1.606-0.483,2.806-1.228,3.675c-0.731,0.863-1.732,1.7-3.351,1.573 c-0.108-1.583,0.506-2.694,1.25-3.561C13.292,0.879,14.557,0.16,15.769,0z"></path> <path d="M20.67,16.716c0,0.016,0,0.03,0,0.045c-0.455,1.378-1.104,2.559-1.896,3.655c-0.723,0.995-1.609,2.334-3.191,2.334 c-1.367,0-2.275-0.879-3.676-0.903c-1.482-0.024-2.297,0.735-3.652,0.926c-0.155,0-0.31,0-0.462,0 c-0.995-0.144-1.798-0.932-2.383-1.642c-1.725-2.098-3.058-4.808-3.306-8.276c0-0.34,0-0.679,0-1.019 c0.105-2.482,1.311-4.5,2.914-5.478c0.846-0.52,2.009-0.963,3.304-0.765c0.555,0.086,1.122,0.276,1.619,0.464 c0.471,0.181,1.06,0.502,1.618,0.485c0.378-0.011,0.754-0.208,1.135-0.347c1.116-0.403,2.21-0.865,3.652-0.648 c1.733,0.262,2.963,1.032,3.723,2.22c-1.466,0.933-2.625,2.339-2.427,4.74C17.818,14.688,19.086,15.964,20.67,16.716z"></path> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> <g> </g> </g> </g></svg>
-			</a>
-            <a onclick="changeView('android')">
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="80px" width="80px" viewBox="-147 -70 294 345"><g fill="#a4c639"><use stroke-width="14.4" xlink:href="#b" stroke="#FFF"/><use xlink:href="#a" transform="scale(-1,1)"/><g id="a" stroke="#FFF" stroke-width="7.2"><rect rx="6.5" transform="rotate(29)" height="86" width="13" y="-86" x="14"/><rect id="c" rx="24" height="133" width="48" y="41" x="-143"/><use y="97" x="85" xlink:href="#c"/></g><g id="b"><ellipse cy="41" rx="91" ry="84"/><rect rx="22" height="182" width="182" y="20" x="-91"/></g></g><g stroke="#FFF" stroke-width="7.2" fill="#FFF"><path d="m-95 44.5h190"/><circle cx="-42" r="4"/><circle cx="42" r="4"/></g></svg>
-			</a>
-            <a onclick="changeView('ios')">
-                <svg height="80px" width="80px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><g id="Layer_2" data-name="Layer 2"><g id="invisible_box" data-name="invisible box"><rect width="48" height="48" fill="none"/><rect width="48" height="48" fill="none"/></g><g id="icons_Q2" data-name="icons Q2"><path d="M20,15.7c-4.5,0-7.5,3.7-7.5,9.3s2.8,9.4,7.2,9.4S27,29.6,27,24.9,25.2,15.7,20,15.7Zm0,0c-4.5,0-7.5,3.7-7.5,9.3s2.8,9.4,7.2,9.4S27,29.6,27,24.9,25.2,15.7,20,15.7ZM42,4H6A2,2,0,0,0,4,6V42a2,2,0,0,0,2,2H42a2,2,0,0,0,2-2V6A2,2,0,0,0,42,4ZM8.9,35.7H7.3V20.2H8.9ZM8,17.3a1.1,1.1,0,0,1-1-1.1,1.1,1.1,0,1,1,2.2,0A1.1,1.1,0,0,1,8,17.3ZM19.7,36c-4.4,0-8.8-3.4-8.8-10.9S15.5,14,20,14a7.7,7.7,0,0,1,3.4.7,8.3,8.3,0,0,1,2.8,2.1,12.5,12.5,0,0,1,2.5,8C28.7,33.1,23.8,36,19.7,36Zm14.8,0a8.4,8.4,0,0,1-4.7-1.4l-.3-.2.7-1.5.4.3a8.2,8.2,0,0,0,4,1.2c2.3,0,4.8-1.6,4.8-4.3s-1.2-3.6-4.2-4.9-5.1-2.4-5.1-5.6,2.5-5.6,6-5.6a7.2,7.2,0,0,1,4,1l.3.3-.7,1.4-.5-.3a6.2,6.2,0,0,0-3.1-.8,4.1,4.1,0,0,0-4.3,4c0,2.2,1.6,3,4,4.1h.3c3.2,1.6,4.9,3,4.9,6.1S38.3,36,34.5,36ZM20,15.7c-4.5,0-7.5,3.7-7.5,9.3s2.8,9.4,7.2,9.4S27,29.6,27,24.9,25.2,15.7,20,15.7Z"/></g></g></svg>
-            </a>
+		<div class="tab">
+			<button class="tablinks" id="windows-button" onclick="changeView(event, 'windows')">
+				<svg width="60px" height="60px" viewBox="-0.5 0 257 257" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" fill="#000000" data-darkreader-inline-fill="" style="--darkreader-inline-fill: #000000;"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M0 36.357L104.62 22.11l.045 100.914-104.57.595L0 36.358zm104.57 98.293l.08 101.002L.081 221.275l-.006-87.302 104.494.677zm12.682-114.405L255.968 0v121.74l-138.716 1.1V20.246zM256 135.6l-.033 121.191-138.716-19.578-.194-101.84L256 135.6z" fill="#00ADEF" data-darkreader-inline-fill="" style="--darkreader-inline-fill: #008abf;"></path></g></svg>
+				<p>Windows</p>
+			</button>
+			<button class="tablinks" id="mac-button" onclick="changeView(event, 'mac')">
+				<svg fill="#000000" height="60px" width="60px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 22.773 22.773" xml:space="preserve" data-darkreader-inline-fill="" style="--darkreader-inline-fill: #000000;"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M15.769,0c0.053,0,0.106,0,0.162,0c0.13,1.606-0.483,2.806-1.228,3.675c-0.731,0.863-1.732,1.7-3.351,1.573 c-0.108-1.583,0.506-2.694,1.25-3.561C13.292,0.879,14.557,0.16,15.769,0z"></path> <path d="M20.67,16.716c0,0.016,0,0.03,0,0.045c-0.455,1.378-1.104,2.559-1.896,3.655c-0.723,0.995-1.609,2.334-3.191,2.334 c-1.367,0-2.275-0.879-3.676-0.903c-1.482-0.024-2.297,0.735-3.652,0.926c-0.155,0-0.31,0-0.462,0 c-0.995-0.144-1.798-0.932-2.383-1.642c-1.725-2.098-3.058-4.808-3.306-8.276c0-0.34,0-0.679,0-1.019 c0.105-2.482,1.311-4.5,2.914-5.478c0.846-0.52,2.009-0.963,3.304-0.765c0.555,0.086,1.122,0.276,1.619,0.464 c0.471,0.181,1.06,0.502,1.618,0.485c0.378-0.011,0.754-0.208,1.135-0.347c1.116-0.403,2.21-0.865,3.652-0.648 c1.733,0.262,2.963,1.032,3.723,2.22c-1.466,0.933-2.625,2.339-2.427,4.74C17.818,14.688,19.086,15.964,20.67,16.716z"></path></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></g></g></svg>
+				<p>Mac</p>
+			</button>
+			<button class="tablinks" id="android-button" onclick="changeView(event, 'android')">
+				<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="60px" width="60px" viewBox="-147 -70 294 345"><g fill="#a4c639"><use stroke-width="14.4" xlink:href="#b" stroke="#FFF"/><use xlink:href="#a" transform="scale(-1,1)"/><g id="a" stroke="#FFF" stroke-width="7.2"><rect rx="6.5" transform="rotate(29)" height="86" width="13" y="-86" x="14"/><rect id="c" rx="24" height="133" width="48" y="41" x="-143"/><use y="97" x="85" xlink:href="#c"/></g><g id="b"><ellipse cy="41" rx="91" ry="84"/><rect rx="22" height="182" width="182" y="20" x="-91"/></g></g><g stroke="#FFF" stroke-width="7.2" fill="#FFF"><path d="m-95 44.5h190"/><circle cx="-42" r="4"/><circle cx="42" r="4"/></g></svg>
+				<p>Android</p>
+			</button>
+			<button class="tablinks" id="ios-button" onclick="changeView(event, 'ios')">
+				<svg height="60px" width="60px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><g id="Layer_2" data-name="Layer 2"><g id="invisible_box" data-name="invisible box"><rect width="48" height="48" fill="none"/><rect width="48" height="48" fill="none"/></g><g id="icons_Q2" data-name="icons Q2"><path d="M20,15.7c-4.5,0-7.5,3.7-7.5,9.3s2.8,9.4,7.2,9.4S27,29.6,27,24.9,25.2,15.7,20,15.7Zm0,0c-4.5,0-7.5,3.7-7.5,9.3s2.8,9.4,7.2,9.4S27,29.6,27,24.9,25.2,15.7,20,15.7ZM42,4H6A2,2,0,0,0,4,6V42a2,2,0,0,0,2,2H42a2,2,0,0,0,2-2V6A2,2,0,0,0,42,4ZM8.9,35.7H7.3V20.2H8.9ZM8,17.3a1.1,1.1,0,0,1-1-1.1,1.1,1.1,0,1,1,2.2,0A1.1,1.1,0,0,1,8,17.3ZM19.7,36c-4.4,0-8.8-3.4-8.8-10.9S15.5,14,20,14a7.7,7.7,0,0,1,3.4.7,8.3,8.3,0,0,1,2.8,2.1,12.5,12.5,0,0,1,2.5,8C28.7,33.1,23.8,36,19.7,36Zm14.8,0a8.4,8.4,0,0,1-4.7-1.4l-.3-.2.7-1.5.4.3a8.2,8.2,0,0,0,4,1.2c2.3,0,4.8-1.6,4.8-4.3s-1.2-3.6-4.2-4.9-5.1-2.4-5.1-5.6,2.5-5.6,6-5.6a7.2,7.2,0,0,1,4,1l.3.3-.7,1.4-.5-.3a6.2,6.2,0,0,0-3.1-.8,4.1,4.1,0,0,0-4.3,4c0,2.2,1.6,3,4,4.1h.3c3.2,1.6,4.9,3,4.9,6.1S38.3,36,34.5,36ZM20,15.7c-4.5,0-7.5,3.7-7.5,9.3s2.8,9.4,7.2,9.4S27,29.6,27,24.9,25.2,15.7,20,15.7Z"/></g></g></svg>
+				<p>IOS</p>
+			</button>
 		</div>
-	    <div class="switch" id="darkModeSwitch">
+		<div class="switch" id="darkModeSwitch">
 			<div class="slider"></div>
-        </div>
-	</div>
-    <div id="windows">
-		<div class="container">
-        <h1>Windows Üzerinde DNS Değiştirme</h1>
-        <p>Windows bilgisayarınızda DNS ayarlarını değiştirmek için aşağıdaki adımları izleyebilirsiniz:</p>
-        <ol>
-            <li>Başlat menüsünden <b>Denetim Masası</b>nı açın.
-                <br><img src="/images/wingorsel1.png" alt="Denetim Masası"></li>
-            <li><b>Ağ ve Paylaşım Merkezi</b>ne gidin.
-                <br><img src="/images/wingorsel2.png" alt="Ağ ve Paylaşım Merkezi"></li>
-            <li>Sol tarafta bulunan <b>Bağdaştırıcı ayarlarını değiştir</b> seçeneğine tıklayın.
-                <br><img src="/images/wingorsel3.png" alt="Bağdaştırıcı Ayarlarını Değiştir"></li>
-            <li>DNS ayarlarını değiştirmek istediğiniz bağlantıya sağ tıklayıp <b>Özellikler</b>i seçin.
-                <br><img src="/images/wingorsel4.png" alt="Bağlantı Özellikleri"></li>
-            <li><b>İnternet Protokolü Sürüm 4 (TCP/IPv4)</b>ü seçip <b>Özellikler</b> butonuna tıklayın.
-                <br><img src="/images/wingorsel5.png" alt="IPv4 Seçimi"></li>
-            <li>Açılan pencerede <b>Aşağıdaki DNS sunucu adreslerini kullan</b>ı seçin.
-                <br><img src="/images/wingorsel6.png" alt="DNS Adresleri Girişi"></li>
-            <li>Tercih edilen ve alternatif DNS adreslerinizi girin. Önerilen DNS adresleri:
-                <ul>
-                    <li>Tercih edilen DNS sunucusu: <code>1.1.1.1</code> (Cloudflare DNS)</li>
-                    <li>Alternatif DNS sunucusu: <code>8.8.8.8</code> (Google DNS)</li>
-                </ul>
-                <br><img src="/images/wingorsel7.png" alt="DNS Girişi"></li>
-            <li>Son olarak <b>Tamam</b> butonuna tıklayın ve değişikliklerinizi kaydedin.
-                <br><img src="/images/wingorsel8.png" alt="Ayarları Kaydet"></li>
-        </ol>
-        <div class="note">
-            <b>Not:</b> DNS değişikliğinizin etkili olması için internet bağlantınızı yeniden başlatmanız gerekebilir.
-        </div>
 		</div>
 	</div>
-	<div id="mac" hidden>
-        <div class="container">
-            <h1>Mac Üzerinde DNS Değiştirme</h1>
-            <p>Mac bilgisayarınızda DNS ayarlarını değiştirmek için aşağıdaki adımları izleyebilirsiniz:</p>
-            <ol>
-                <li>Sol üst köşedeki <b>Apple menüsüne</b> tıklayın ve <b>Sistem Ayarları</b>nı seçin.
-                    <br><img src="/images/macgorsel1.png" alt="Sistem Ayarları"></li>
-                <li><b>Network</b> simgesine tıklayın.
-                    <br><img src="/images/macgorsel2.png" alt="Ağ Ayarları"></li>
-                <li>Listedeki bağlantı listesinde, DNS ayarlarını değiştirmek istediğiniz ağı seçin.
-                    <br><img src="/images/macgorsel3.png" alt="Bağlantı Seçimi"></li>
-                <li>Sağ alttaki <b>Detaylar</b> butonuna tıklayın.
-                    <br><img src="/images/macgorsel4.png" alt="Gelişmiş Ayarlar"></li>
-                <li>Üstteki sekmelerden <b>DNS</b> sekmesine gidin.
-                    <br><img src="/images/macgorsel5.png" alt="DNS Sekmesi"></li>
-                <li>DNS sunucu adreslerini değiştirmek için <b>+ Butonuna</b> tıklayın ve tercih ettiğiniz DNS adreslerini girin:
-                    <ul>
-                        <li>Tercih edilen DNS sunucusu: <code>1.1.1.1</code> (Cloudflare DNS)</li>
-                        <li>Alternatif DNS sunucusu: <code>8.8.8.8</code> (Google DNS)</li>
-                    </ul>
-                    <img src="/images/macgorsel6.png" alt="DNS Girişi"></li>
-                <li>Son olarak <b>Tamam</b> butonuna tıklayın değişikliklerinizi kaydedin.
-                </li>
-            </ol>
-            <div class="note">
-                <b>Not:</b> DNS değişikliğinizin etkili olması için internet bağlantınızı yeniden başlatmanız gerekebilir.
-            </div>
-        </div>
+	<div id="windows" class="tabcontent">
+		<div class="container">
+		<h1>Windows Üzerinde DNS Değiştirme</h1>
+		<p>Windows bilgisayarınızda DNS ayarlarını değiştirmek için aşağıdaki adımları izleyebilirsiniz:</p>
+		<ol>
+			<li>Başlat menüsünden <b>Denetim Masası</b>nı açın.
+				<br><img src="images/wingorsel1.png" alt="Denetim Masası"></li>
+			<li><b>Ağ ve Paylaşım Merkezi</b>ne gidin.
+				<br><img src="images/wingorsel2.png" alt="Ağ ve Paylaşım Merkezi"></li>
+			<li>Sol tarafta bulunan <b>Bağdaştırıcı ayarlarını değiştir</b> seçeneğine tıklayın.
+				<br><img src="images/wingorsel3.png" alt="Bağdaştırıcı Ayarlarını Değiştir"></li>
+			<li>DNS ayarlarını değiştirmek istediğiniz bağlantıya sağ tıklayıp <b>Özellikler</b>i seçin.
+				<br><img src="images/wingorsel4.png" alt="Bağlantı Özellikleri"></li>
+			<li><b>İnternet Protokolü Sürüm 4 (TCP/IPv4)</b>ü seçip <b>Özellikler</b> butonuna tıklayın.
+				<br><img src="images/wingorsel5.png" alt="IPv4 Seçimi"></li>
+			<li>Açılan pencerede <b>Aşağıdaki DNS sunucu adreslerini kullan</b>ı seçin.
+				<br><img src="images/wingorsel6.png" alt="DNS Adresleri Girişi"></li>
+			<li>Tercih edilen ve alternatif DNS adreslerinizi girin. Önerilen DNS adresleri:
+				<ul>
+					<li>Tercih edilen DNS sunucusu: <code>1.1.1.1</code> (Cloudflare DNS)</li>
+					<li>Alternatif DNS sunucusu: <code>8.8.8.8</code> (Google DNS)</li>
+				</ul>
+				<br><img src="images/wingorsel7.png" alt="DNS Girişi"></li>
+			<li>Son olarak <b>Tamam</b> butonuna tıklayın ve değişikliklerinizi kaydedin.
+				<br><img src="images/wingorsel8.png" alt="Ayarları Kaydet"></li>
+		</ol>
+		<div class="note">
+			<b>Not:</b> DNS değişikliğinizin etkili olması için internet bağlantınızı yeniden başlatmanız gerekebilir.
+		</div>
+		</div>
 	</div>
-    <div id="android" hidden>
-        <div class="container">
-            <h1>Android Üzerinde DNS Değiştirme</h1>
-            <p>Android bilgisayarınızda DNS ayarlarını değiştirmek için aşağıdaki adımları izleyebilirsiniz:</p>
-            <ol>
-                <li>Üst kısımda yer alan durum çubuğundan <b>Ayarlar sembolüne</b> tıklayın ve <b>Sistem Ayarları</b>nı seçin.
-                    <br><img src="/images/androidgorsel1.png" alt="Cihaz Ayarları"></li>
-                <li><b>Bağlantılar</b> menüsüne tıklayın.
-                    <br><img src="/images/androidgorsel2.png" alt="Bağlantılar Menüsü"></li>
-                <li><b>Wifi</b> menüsüne tıklayın.
-                    <br><img src="/images/androidgorsel3.png" alt="Wifi Menüsü"></li>
-                <li>Listeden DNS ayarlarını değiştirmek istediğiniz ağın sağ tarafında yer alan <b>ayarlar</b> sembolüne basın.
-                    <br><img src="/images/androidgorsel4.png" alt="Wifi Detay"></li>
-                <li>Aşağıda yer alan <b>Daha fazla gör</b> seçeneğine tıklayın.
-                    <br><img src="/images/androidgorsel5.png" alt="Wifi Detay > Daha fazla gör"></li>
-                <li><b>IP ayarları</b> alanı (daha önce değişiklik yapmadıysanız) <b>DHCP</b> olarak görünecektir. O alanı <b>Statik</b> olarak değiştirin.
-                    <br>Aşağıda yer alan <b>DNS 1</b> ve <b>DNS 2</b> alanlarına DNS adreslerini girin:
-                    <ul>
-                        <li>DNS 1: <code>1.1.1.1</code> (Cloudflare DNS)</li>
-                        <li>DNS 2: <code>8.8.8.8</code> (Google DNS)</li>
-                    </ul>
-                    Son olarak <b>Kaydet</b> butonuna tıklayın.
-                    <br><img src="/images/androidgorsel6.png" alt="DNS Değiştirme Ekranı / IP Ayarları"></li>
-            </ol>
-            <div class="note">
-                <b>Not:</b> DNS değişikliğinizin etkili olması için internet bağlantınızı yeniden başlatmanız gerekebilir.
-            </div>
-        </div>
+	<div id="mac" class="tabcontent">
+		<div class="container">
+			<h1>Mac Üzerinde DNS Değiştirme</h1>
+			<p>Mac bilgisayarınızda DNS ayarlarını değiştirmek için aşağıdaki adımları izleyebilirsiniz:</p>
+			<ol>
+				<li>Sol üst köşedeki <b>Apple menüsüne</b> tıklayın ve <b>Sistem Ayarları</b>nı seçin.
+					<br><img src="images/macgorsel1.png" alt="Sistem Ayarları"></li>
+				<li><b>Network</b> simgesine tıklayın.
+					<br><img src="images/macgorsel2.png" alt="Ağ Ayarları"></li>
+				<li>Listedeki bağlantı listesinde, DNS ayarlarını değiştirmek istediğiniz ağı seçin.
+					<br><img src="images/macgorsel3.png" alt="Bağlantı Seçimi"></li>
+				<li>Sağ alttaki <b>Detaylar</b> butonuna tıklayın.
+					<br><img src="images/macgorsel4.png" alt="Gelişmiş Ayarlar"></li>
+				<li>Üstteki sekmelerden <b>DNS</b> sekmesine gidin.
+					<br><img src="images/macgorsel5.png" alt="DNS Sekmesi"></li>
+				<li>DNS sunucu adreslerini değiştirmek için <b>+ Butonuna</b> tıklayın ve tercih ettiğiniz DNS adreslerini girin:
+					<ul>
+						<li>Tercih edilen DNS sunucusu: <code>1.1.1.1</code> (Cloudflare DNS)</li>
+						<li>Alternatif DNS sunucusu: <code>8.8.8.8</code> (Google DNS)</li>
+					</ul>
+					<img src="images/macgorsel6.png" alt="DNS Girişi"></li>
+				<li>Son olarak <b>Tamam</b> butonuna tıklayın değişikliklerinizi kaydedin.
+				</li>
+			</ol>
+			<div class="note">
+				<b>Not:</b> DNS değişikliğinizin etkili olması için internet bağlantınızı yeniden başlatmanız gerekebilir.
+			</div>
+		</div>
 	</div>
-    <div id="ios" hidden>
-        <div class="container">
-            <h1>iOS Üzerinde DNS Değiştirme</h1>
-            <p>iOS Telefonunuzda DNS ayarlarını değiştirmek için aşağıdaki adımları izleyebilirsiniz:</p>
-            <ol>
-                <li>Telefonunuzun <b>Ayarlar</b> kısmına girin ve <b>Wi-Fi</b> menüsünü seçin.
-                    <br><img src="/images/iosgorsel1.png" alt="Wi-Fi Ayarları"></li>
-                <li>Bağlı olduğunuz <b>Wi-Fi</b> ağının sağ tarafında bulunan <b>info</b> simgesine tıklayın.
-                    <br><img src="/images/iosgorsel2.png" alt="Ağ Ayarları"></li>
-                <li>Menude aşağı indiğimiz zaman görebileceğimiz <b>DNS'i Ayarla</b> bölümüne giriyoruz.
-                    <br><img src="/images/iosgorsel3.png" alt="Bağlantı Seçimi"></li>
-                <li>Bu kısımda Otomatik olan ayarı Elle yapıyoruz.
-                    <br><img src="/images/iosgorsel4.png" alt="Gelişmiş Ayarlar"></li>
-                <li>Alt kısımdan <b>+ Sunucu Ekle</b> butonuna tıklayın ve DNS adreslerini girin.:
-                    <ul>
-                        <li>Tercih edilen DNS sunucusu: <code>1.1.1.1</code> (Cloudflare DNS)</li>
-                        <li>Alternatif DNS sunucusu: <code>8.8.8.8</code> (Google DNS)</li>
-                    </ul>
-                    <img src="/images/iosgorsel5.png" alt="DNS Girişi"></li>
-                <li>Son olarak <b>Kaydet</b> butonuna tıklayın değişikliklerinizi kaydedin.
-                </li>
-            </ol>
-            <div class="note">
-                <b>Not:</b> DNS değişikliğinizin etkili olması için internet bağlantınızı yeniden başlatmanız gerekebilir.
-            </div>
-        </div>
+	<div id="android" class="tabcontent">
+		<div class="container">
+			<h1>Android Üzerinde DNS Değiştirme</h1>
+			<p>Android bilgisayarınızda DNS ayarlarını değiştirmek için aşağıdaki adımları izleyebilirsiniz:</p>
+			<ol>
+				<li>Üst kısımda yer alan durum çubuğundan <b>Ayarlar sembolüne</b> tıklayın ve <b>Sistem Ayarları</b>nı seçin.
+					<br><img src="images/androidgorsel1.png" alt="Cihaz Ayarları"></li>
+				<li><b>Bağlantılar</b> menüsüne tıklayın.
+					<br><img src="images/androidgorsel2.png" alt="Bağlantılar Menüsü"></li>
+				<li><b>Wifi</b> menüsüne tıklayın.
+					<br><img src="images/androidgorsel3.png" alt="Wifi Menüsü"></li>
+				<li>Listeden DNS ayarlarını değiştirmek istediğiniz ağın sağ tarafında yer alan <b>ayarlar</b> sembolüne basın.
+					<br><img src="images/androidgorsel4.png" alt="Wifi Detay"></li>
+				<li>Aşağıda yer alan <b>Daha fazla gör</b> seçeneğine tıklayın.
+					<br><img src="images/androidgorsel5.png" alt="Wifi Detay > Daha fazla gör"></li>
+				<li><b>IP ayarları</b> alanı (daha önce değişiklik yapmadıysanız) <b>DHCP</b> olarak görünecektir. O alanı <b>Statik</b> olarak değiştirin.
+					<br>Aşağıda yer alan <b>DNS 1</b> ve <b>DNS 2</b> alanlarına DNS adreslerini girin:
+					<ul>
+						<li>DNS 1: <code>1.1.1.1</code> (Cloudflare DNS)</li>
+						<li>DNS 2: <code>8.8.8.8</code> (Google DNS)</li>
+					</ul>
+					Son olarak <b>Kaydet</b> butonuna tıklayın.
+					<br><img src="images/androidgorsel6.png" alt="DNS Değiştirme Ekranı / IP Ayarları"></li>
+			</ol>
+			<div class="note">
+				<b>Not:</b> DNS değişikliğinizin etkili olması için internet bağlantınızı yeniden başlatmanız gerekebilir.
+			</div>
+		</div>
 	</div>
-    <script>
-        const darkModeSwitch = document.getElementById('darkModeSwitch');
-        darkModeSwitch.addEventListener('click', function() {
-            document.body.classList.toggle('dark-mode');
-            darkModeSwitch.classList.toggle('active');
-        });
-		
-		function changeView(param){
-            var w = document.getElementById('windows');
-            var m = document.getElementById('mac');
-            var a = document.getElementById('android');
-            var i = document.getElementById('ios');
-            if(param=='windows'){
-                m.setAttribute("hidden","");
-                a.setAttribute("hidden","");
-                i.setAttribute("hidden","");
-                w.removeAttribute("hidden","");
-            }
-            if(param=='mac'){
-                w.setAttribute("hidden","");
-                a.setAttribute("hidden","");
-                i.setAttribute("hidden","");
-                m.removeAttribute("hidden","");
-            }
-            if(param=='android'){
-                w.setAttribute("hidden","");
-                m.setAttribute("hidden","");
-                i.setAttribute("hidden","");
-                a.removeAttribute("hidden","");
-            }
-            if(param=='ios'){
-                w.setAttribute("hidden","");
-                m.setAttribute("hidden","");
-                a.setAttribute("hidden","");
-                i.removeAttribute("hidden","");
-            }
+	<div id="ios" class="tabcontent">
+		<div class="container">
+			<h1>iOS Üzerinde DNS Değiştirme</h1>
+			<p>iOS Telefonunuzda DNS ayarlarını değiştirmek için aşağıdaki adımları izleyebilirsiniz:</p>
+			<ol>
+				<li>Telefonunuzun <b>Ayarlar</b> kısmına girin ve <b>Wi-Fi</b> menüsünü seçin.
+					<br><img src="images/iosgorsel1.png" alt="Wi-Fi Ayarları"></li>
+				<li>Bağlı olduğunuz <b>Wi-Fi</b> ağının sağ tarafında bulunan <b>info</b> simgesine tıklayın.
+					<br><img src="images/iosgorsel2.png" alt="Ağ Ayarları"></li>
+				<li>Menude aşağı indiğimiz zaman görebileceğimiz <b>DNS'i Ayarla</b> bölümüne giriyoruz.
+					<br><img src="images/iosgorsel3.png" alt="Bağlantı Seçimi"></li>
+				<li>Bu kısımda Otomatik olan ayarı Elle yapıyoruz.
+					<br><img src="images/iosgorsel4.png" alt="Gelişmiş Ayarlar"></li>
+				<li>Alt kısımdan <b>+ Sunucu Ekle</b> butonuna tıklayın ve DNS adreslerini girin.:
+					<ul>
+						<li>Tercih edilen DNS sunucusu: <code>1.1.1.1</code> (Cloudflare DNS)</li>
+						<li>Alternatif DNS sunucusu: <code>8.8.8.8</code> (Google DNS)</li>
+					</ul>
+					<img src="images/iosgorsel5.png" alt="DNS Girişi"></li>
+				<li>Son olarak <b>Kaydet</b> butonuna tıklayın değişikliklerinizi kaydedin.
+				</li>
+			</ol>
+			<div class="note">
+				<b>Not:</b> DNS değişikliğinizin etkili olması için internet bağlantınızı yeniden başlatmanız gerekebilir.
+			</div>
+		</div>
+	</div>
+	<script>
+		var i, tabcontent, tablinks, darkModeSwitch;
+		tabcontent = document.getElementsByClassName("tabcontent");
+		tablinks = document.getElementsByClassName("tablinks");
+		darkModeSwitch = document.getElementById('darkModeSwitch');
+		let localStorage = window.localStorage;
+		let userAgents = navigator.userAgent || navigator.vendor || window.opera
+
+		window.addEventListener("load", (event) => {
+			if(localStorage.getItem('darkMode') === 'true') {
+				document.body.classList.add('dark-mode');
+				darkModeSwitch.classList.add('dark-active');
+			}
+			for(i = 0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = 'none';
+			}
+
+			if(localStorage.getItem('activeTab') !== null) {
+				document.getElementById(localStorage.getItem('activeTab')).style.display = 'block';
+				document.getElementById(localStorage.getItem('activeTab') + '-button').className += ' active';
+			} else {
+				userAgents.match(/Windows/i) ? document.getElementById('windows').style.display = 'block' : '';
+				userAgents.match(/Macintosh/i) ? document.getElementById('mac').style.display = 'block' : '';
+				userAgents.match(/Android|aarch64/i) ? document.getElementById('android').style.display = 'block' : '';
+				userAgents.match(/iPhone|iPad|iPod/i) ? document.getElementById('ios').style.display = 'block' : '';
+
+				// Default tab
+				for(i = 0; i < tablinks.length; i++) {
+					if(tabcontent[i].style.display === 'block') {
+						tablinks[i].className += ' active';
+					}
+				}
+			}
+		});
+
+		darkModeSwitch.addEventListener('click', function() {
+			document.body.classList.toggle('dark-mode');
+			darkModeSwitch.classList.toggle('dark-active');
+			localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+		});
+
+		function changeView(event, param) {
+			for (i = 0; i < tabcontent.length; i++) {
+				tabcontent[i].style.display = "none";
+			}
+			for (i = 0; i < tablinks.length; i++) {
+				tablinks[i].className = tablinks[i].className.replace(" active", "");
+			}
+			document.getElementById(param).style.display = "block";
+			event.currentTarget.className += " active";
+			localStorage.setItem('activeTab', param);
 		}
-    </script>
+	</script>
 
 </body>
 </html>
