@@ -337,21 +337,50 @@
 		tabcontent = document.getElementsByClassName("tabcontent");
 		tablinks = document.getElementsByClassName("tablinks");
 		darkModeSwitch = document.getElementById('darkModeSwitch');
-		let localStorage = window.localStorage;
 		let userAgents = navigator.userAgent || navigator.vendor || window.opera
+		let localStorage = window.localStorage;
+		let getDarkMode = localStorage.getItem('darkMode');
+		let getActiveTab = localStorage.getItem('activeTab');
 
 		window.addEventListener("load", (event) => {
-			if(localStorage.getItem('darkMode') === 'true') {
-				document.body.classList.add('dark-mode');
-				darkModeSwitch.classList.add('dark-active');
+			// Dark mode detection
+			if(getDarkMode !== null) {
+				if(getDarkMode === 'true') {
+					document.body.classList.add('dark-mode');
+					darkModeSwitch.classList.add('dark-active');
+				} else if(getDarkMode === 'false') {
+					document.body.classList.remove('dark-mode');
+					darkModeSwitch.classList.remove('dark-active');
+				}
+			} else {
+				if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					document.body.classList.add('dark-mode');
+					darkModeSwitch.classList.add('dark-active');
+				} else {
+					document.body.classList.remove('dark-mode');
+					darkModeSwitch.classList.remove('dark-active');
+				}
 			}
+
+			// Dark Mode Watcher
+			window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+				if(e.matches) {
+					document.body.classList.add('dark-mode');
+					darkModeSwitch.classList.add('dark-active');
+				} else {
+					document.body.classList.remove('dark-mode');
+					darkModeSwitch.classList.remove('dark-active');
+				}
+			});
+			
+			// Tab content display
 			for(i = 0; i < tabcontent.length; i++) {
 				tabcontent[i].style.display = 'none';
 			}
 
-			if(localStorage.getItem('activeTab') !== null) {
-				document.getElementById(localStorage.getItem('activeTab')).style.display = 'block';
-				document.getElementById(localStorage.getItem('activeTab') + '-button').className += ' active';
+			if(getActiveTab !== null) {
+				document.getElementById(getActiveTab).style.display = 'block';
+				document.getElementById(getActiveTab + '-button').className += ' active';
 			} else {
 				userAgents.match(/Windows/i) ? document.getElementById('windows').style.display = 'block' : '';
 				userAgents.match(/Macintosh/i) ? document.getElementById('mac').style.display = 'block' : '';
